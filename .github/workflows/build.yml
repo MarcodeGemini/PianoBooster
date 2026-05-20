@@ -20,22 +20,13 @@ jobs:
           
       - name: Package Dependencies for macOS
         run: |
-          if [ -d "build/pianobooster.app" ]; then
-            $(brew --prefix qt@6)/bin/macdeployqt build/pianobooster.app -verbose=1
-            echo "APP_PATH=build/pianobooster.app" >> $GITHUB_ENV
-          elif [ -d "build/src/pianobooster.app" ]; then
-            $(brew --prefix qt@6)/bin/macdeployqt build/src/pianobooster.app -verbose=1
-            echo "APP_PATH=build/src/pianobooster.app" >> $GITHUB_ENV
-          else
-            echo "Error: App bundle not found!"
-            exit 1
-          fi
+          $(brew --prefix qt@6)/bin/macdeployqt build/src/pianobooster.app -verbose=1
           
       - name: Save Mac App
         uses: actions/upload-artifact@v4
         with:
           name: PianoBooster-Mac
-          path: ${{ env.APP_PATH }}
+          path: build/src/pianobooster.app
           
   build-windows:
     runs-on: windows-2025
