@@ -30,7 +30,7 @@
 #include <QTime>
 #include <QBasicTimer>
 #include <QElapsedTimer>
-#include <QOpenGLWidgets/QOpenGLWidget>
+#include <qopenglwidget.h>
 #include "Song.h"
 #include "Score.h"
 #include "Settings.h"
