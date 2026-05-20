@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@v4
       
       - name: Install dependencies
-        run: brew install qt@6 fluidsynth rtmidi cmake
+        run: brew install qt@6 fluidsynth rtmidi cmake ftgl
         
       - name: Build
         run: |
