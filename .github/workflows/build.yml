@@ -15,8 +15,12 @@ jobs:
       - name: Build
         run: |
           mkdir build && cd build
-          cmake .. -DCMAKE_PREFIX_PATH=$(brew --prefix qt@6)
+          cmake .. -DCMAKE_PREFIX_PATH=$(brew --prefix qt@6) -DCMAKE_BUILD_TYPE=Release
           make -j4
+
+      - name: Package Dependencies for macOS
+        run: |
+          $(brew --prefix qt@6)/share/qt/libexec/macdeployqt build/src/pianobooster.app -verbose=1
           
       - name: Save Mac App
         uses: actions/upload-artifact@v4
