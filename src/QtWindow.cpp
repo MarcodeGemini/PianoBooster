@@ -99,8 +99,8 @@ QtWindow::QtWindow()
     QHBoxLayout *mainLayout = new QHBoxLayout;
     QVBoxLayout *columnLayout = new QVBoxLayout;
 
-    m_sidePanel = new GuiSidePanel(this, m_settings);
-    m_topBar = new GuiTopBar(this, m_settings);
+    m_sidePanel = new GuiSidePanel(this, m_settings.get());
+    m_topBar = new GuiTopBar(this, m_settings.get());
     m_tutorWindow = new QTextBrowser(this);
     m_tutorWindow->hide();
 
