@@ -58,7 +58,7 @@ static int set_realtime_priority(int policy, int prio)
 
 QtWindow::QtWindow()
 {
-    m_settings = new CSettings(this);
+    m_settings = std::make_unique<CSettings>(this);
     setWindowIcon(QIcon(":/images/pianobooster.png"));
     setWindowTitle(tr("Piano Booster"));
 
@@ -90,7 +90,7 @@ QtWindow::QtWindow()
 
     QSurfaceFormat::setDefaultFormat(fmt);
 
-    m_glWidget = new CGLView(this, m_settings);
+    m_glWidget = new CGLView(this, m_settings.get());
     m_glWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     m_song = m_glWidget->getSongObject();
@@ -112,7 +112,7 @@ QtWindow::QtWindow()
     columnLayout->addWidget(m_tutorWindow);
     mainLayout->addLayout(columnLayout);
 
-    m_song->init2(m_score, m_settings);
+    m_song->init2(m_score, m_settings.get());
 
     m_sidePanel->init(m_song, m_song->getTrackList(), m_topBar);
     m_topBar->init(m_song);
@@ -159,7 +159,6 @@ void QtWindow::init()
 
 QtWindow::~QtWindow()
 {
-    delete m_settings;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
