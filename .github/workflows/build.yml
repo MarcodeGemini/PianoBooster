@@ -25,21 +25,27 @@ jobs:
           path: build/
 
   build-windows:
-    runs-on: windows-latest
+    runs-on: windows-2025
     steps:
       - name: Get the code
         uses: actions/checkout@v4
-        
-      - name: Install Qt
-        uses: jurplel/install-qt-action@v3
+
+      - name: Install Windows Dependencies
+        run: |
+          vcpkg install fluidsynth rtmidi ftgl --triplet x64-windows
+
+      - name: Install Qt6 on Windows
+        uses: miurahr/install-qt-action@v3
         with:
-          version: '6.5.0'
+          version: '6.5.3'
+          target: 'desktop'
+          arch: 'win64_msvc2019_64'
           
       - name: Build
         run: |
           mkdir build
           cd build
-          cmake ..
+          cmake .. -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake
           cmake --build . --config Release
           
       - name: Save Windows App
