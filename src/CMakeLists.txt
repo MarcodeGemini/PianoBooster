@@ -102,6 +102,7 @@ endif(${CMAKE_SYSTEM} MATCHES "Windows")
 
 if(${CMAKE_SYSTEM} MATCHES "Darwin")
     ADD_DEFINITIONS(-D__MACOSX_CORE__)
+    ADD_DEFINITIONS(-DGL_SILENCE_DEPRECATION)
     LINK_LIBRARIES("-framework CoreMidi -framework CoreAudio -framework CoreFoundation -framework OpenGL")
 endif(${CMAKE_SYSTEM} MATCHES "Darwin")
 
