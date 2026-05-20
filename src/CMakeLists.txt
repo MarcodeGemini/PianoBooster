@@ -236,7 +236,7 @@ if(APPLE OR ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")    # the property added the p
     set(pianobooster_ICON ${CMAKE_CURRENT_SOURCE_DIR}/../icons/MacOS/pianobooster.icns)
     set_source_files_properties(${pianobooster_ICON} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
 
-    set(pianobooster_TRANSLATIONS ${CMAKE_CURRENT_BINARY_DIR}/translations/langs.json)
+    set(pianobooster_TRANSLATIONS ${CMAKE_CURRENT_SOURCE_DIR}/../translations/langs.json)
     set_source_files_properties(${pianobooster_TRANSLATIONS} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources/translations")
 
     set(pianobooster_MUSIC ${CMAKE_CURRENT_SOURCE_DIR}/../music/BoosterMusicBooks.zip)
@@ -251,7 +251,7 @@ if(APPLE OR ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")    # the property added the p
         ${PIANOBOOSTER_MOC_SRCS} ${PIANOBOOSTER_RC_SRCS}
         ${PIANOBOOSTER_UI_HDRS} ${PIANOBOOSTER_RCS} )
 
-    add_custom_target(install-translations cp -R -v ${CMAKE_CURRENT_BINARY_DIR}/translations/*.qm ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.app/Contents/Resources/translations)
+    add_custom_target(install-translations cp -R -v ${CMAKE_BINARY_DIR}/translations/*.qm ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.app/Contents/Resources/translations)
 
 endif(APPLE OR ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 
