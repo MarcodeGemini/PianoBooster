@@ -323,16 +323,19 @@ void QtWindow::createActions()
     m_openAct = new QAction(QIcon(":/images/open.png"), tr("&Open..."), this);
     m_openAct->setShortcut(tr("Ctrl+O"));
     m_openAct->setToolTip(tr("Open an existing file"));
-    connect(m_openAct, SIGNAL(triggered()), this, SLOT(open()));
+    // Modernized connection:
+    connect(m_openAct, &QAction::triggered, this, &QtWindow::open);
 
     m_exitAct = new QAction(tr("E&xit"), this);
     m_exitAct->setShortcut(tr("Ctrl+Q"));
     m_exitAct->setToolTip(tr("Exit the application"));
-    connect(m_exitAct, SIGNAL(triggered()), this, SLOT(close()));
+    // Modernized connection:
+    connect(m_exitAct, &QAction::triggered, this, &QtWindow::close);
 
     m_aboutAct = new QAction(tr("&About"), this);
     m_aboutAct->setToolTip(tr("Show the application's About box"));
-    connect(m_aboutAct, SIGNAL(triggered()), this, SLOT(about()));
+    // Modernized connection:
+    connect(m_aboutAct, &QAction::triggered, this, &QtWindow::about);
 
     m_shortcutAct = new QAction(tr("&PC Shortcut Keys"), this);
     m_shortcutAct->setToolTip(tr("The PC Keyboard shortcut keys"));
