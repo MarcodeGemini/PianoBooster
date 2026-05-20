@@ -308,11 +308,11 @@ public:
          case METASEQEVENT:              r = "METASEQEVENT";break;
 
          default:
-           {
-             char s[16];
-             sprintf(s, "%2x", atype);
-             r = s;
-           }
+            {
+              char s[16];
+              snprintf(s, sizeof(s), "%2x", atype);
+              r = s;
+            }
          }
          return r;
        }
