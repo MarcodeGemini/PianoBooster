@@ -91,7 +91,7 @@ private slots:
     void showPreferencesDialog()
     {
         GuiPreferencesDialog preferencesDialog(this);
-        preferencesDialog.init(m_song, m_settings, m_glWidget);
+        preferencesDialog.init(m_song, m_settings.get(), m_glWidget);
         preferencesDialog.exec();
 
         refreshTranslate();
@@ -101,14 +101,14 @@ private slots:
     void showSongDetailsDialog()
     {
         GuiSongDetailsDialog songDetailsDialog(this);
-        songDetailsDialog.init(m_song, m_settings);
+        songDetailsDialog.init(m_song, m_settings.get());
         songDetailsDialog.exec();
     }
 
     void showKeyboardSetup()
     {
         GuiKeyboardSetupDialog keyboardSetup(this);
-        keyboardSetup.init(m_song, m_settings);
+        keyboardSetup.init(m_song, m_settings.get());
         keyboardSetup.exec();
     }
 
