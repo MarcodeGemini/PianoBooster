@@ -30,16 +30,9 @@ jobs:
       - name: Get the code
         uses: actions/checkout@v4
 
-      - name: Install Windows Dependencies
+      - name: Install Windows Dependencies via Vcpkg
         run: |
-          vcpkg install fluidsynth rtmidi ftgl --triplet x64-windows
-
-      - name: Install Qt6 on Windows
-        uses: miurahr/install-qt-action@v3
-        with:
-          version: '6.5.3'
-          target: 'desktop'
-          arch: 'win64_msvc2019_64'
+          vcpkg install qtbase fluidsynth rtmidi ftgl --triplet x64-windows
           
       - name: Build
         run: |
