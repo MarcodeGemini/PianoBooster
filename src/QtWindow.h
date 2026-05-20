@@ -28,6 +28,7 @@
 #define __QT_WINDOW_H__
 
 #include <QtWidgets>
+#include <memory>
 
 #include "Song.h"
 #include "Score.h"
@@ -43,6 +44,8 @@
 class CGLView;
 class QAction;
 class QMenu;
+
+std::unique_ptr<CSettings> m_settings;
 
 class QSlider;
 class QPushButton;
