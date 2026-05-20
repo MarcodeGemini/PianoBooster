@@ -20,14 +20,27 @@ jobs:
           
       - name: Package Dependencies for macOS
         run: |
-          # Target the true app bundle folder that CMake generated
-          $(brew --prefix qt@6)/bin/macdeployqt build/pianobooster.app -verbose=1
+          # 1. Ask the system to find the exact location of the bundle
+          APP_PATH=$(find . -name "pianobooster.app" -type d | head -n 1)
+          
+          if [ -z "$APP_PATH" ]; then
+            echo "Error: Could not find pianobooster.app anywhere!"
+            exit 1
+          fi
+          
+          echo "Found the app bundle successfully at: $APP_PATH"
+          
+          # 2. Run macdeployqt on that exact path
+          $(brew --prefix qt@6)/bin/macdeployqt "$APP_PATH" -verbose=1
+          
+          # 3. Save the path to an environment variable for the artifact uploader
+          echo "BUNDLE_PATH=$APP_PATH" >> $GITHUB_ENV
           
       - name: Save Mac App
         uses: actions/upload-artifact@v4
         with:
           name: PianoBooster-Mac
-          path: build/pianobooster.app
+          path: ${{ env.BUNDLE_PATH }}
           
   build-windows:
     runs-on: windows-2025
