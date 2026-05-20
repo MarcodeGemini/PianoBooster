@@ -20,17 +20,14 @@ jobs:
           
       - name: Package Dependencies for macOS
         run: |
-          # Create a clean folder structure for delivery
-          mkdir -p dist
-          cp build/src/pianobooster dist/
-          # Run macdeployqt directly on the standalone binary executable
-          $(brew --prefix qt@6)/bin/macdeployqt dist/pianobooster -verbose=1
+          # Target the true app bundle folder that CMake generated
+          $(brew --prefix qt@6)/bin/macdeployqt build/pianobooster.app -verbose=1
           
       - name: Save Mac App
         uses: actions/upload-artifact@v4
         with:
           name: PianoBooster-Mac
-          path: dist/
+          path: build/pianobooster.app
           
   build-windows:
     runs-on: windows-2025
