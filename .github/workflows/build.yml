@@ -20,7 +20,7 @@ jobs:
 
       - name: Package Dependencies for macOS
         run: |
-          $(brew --prefix qt@6)/share/qt/libexec/macdeployqt build/src/pianobooster.app -verbose=1
+          $(brew --prefix qt@6)/bin/macdeployqt build/src/pianobooster.app -verbose=1
           
       - name: Save Mac App
         uses: actions/upload-artifact@v4
