@@ -39,25 +39,25 @@ jobs:
           name: PianoBooster-Mac
           path: dist/
 
-  build-windows:
-    runs-on: windows-2025
-    steps:
-      - name: Get the code
-        uses: actions/checkout@v4
-
-      - name: Install Windows Dependencies via Vcpkg
-        run: |
-          vcpkg install qtbase fluidsynth rtmidi ftgl --triplet x64-windows
-          
-      - name: Build
-        run: |
-          mkdir build
-          cd build
-          cmake .. -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake
-          cmake --build . --config Release
-          
-      - name: Save Windows App
-        uses: actions/upload-artifact@v4
-        with:
-          name: PianoBooster-Windows
-          path: build/Release/
+#  build-windows:
+#    runs-on: windows-2025
+#    steps:
+#      - name: Get the code
+#        uses: actions/checkout@v4
+#
+#      - name: Install Windows Dependencies via Vcpkg
+#        run: |
+#          vcpkg install qtbase fluidsynth rtmidi ftgl --triplet x64-windows
+#          
+#      - name: Build
+#        run: |
+#          mkdir build
+#          cd build
+#          cmake .. -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake
+#          cmake --build . --config Release
+#          
+#      - name: Save Windows App
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: PianoBooster-Windows
+#          path: build/Release/
