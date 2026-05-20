@@ -17,17 +17,26 @@ jobs:
           mkdir build && cd build
           cmake .. -DCMAKE_PREFIX_PATH=$(brew --prefix qt@6) -DCMAKE_BUILD_TYPE=Release
           make -j4
-
+          
       - name: Package Dependencies for macOS
         run: |
-          $(brew --prefix qt@6)/bin/macdeployqt build/src/pianobooster.app -verbose=1
+          if [ -d "build/pianobooster.app" ]; then
+            $(brew --prefix qt@6)/bin/macdeployqt build/pianobooster.app -verbose=1
+            echo "APP_PATH=build/pianobooster.app" >> $GITHUB_ENV
+          elif [ -d "build/src/pianobooster.app" ]; then
+            $(brew --prefix qt@6)/bin/macdeployqt build/src/pianobooster.app -verbose=1
+            echo "APP_PATH=build/src/pianobooster.app" >> $GITHUB_ENV
+          else
+            echo "Error: App bundle not found!"
+            exit 1
+          fi
           
       - name: Save Mac App
         uses: actions/upload-artifact@v4
         with:
           name: PianoBooster-Mac
-          path: build/
-
+          path: ${{ env.APP_PATH }}
+          
   build-windows:
     runs-on: windows-2025
     steps:
