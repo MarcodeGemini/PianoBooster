@@ -315,7 +315,7 @@ if(NOT USE_SYSTEM_FONT)
 endif(NOT USE_SYSTEM_FONT)
 
 if(NOT NO_LANGS)
-    ADD_SUBDIRECTORY(../translations ../build/translations)
+    
 endif(NOT NO_LANGS)
 
 if(DEBUG_LOG_TRACE)
