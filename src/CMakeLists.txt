@@ -228,8 +228,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 # here we instruct CMake to build "pianobooster" executable from all of the source files
-if(APPLE)
-    # the property added the pianobooster icon to Info.plist
+if(APPLE OR ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")    # the property added the pianobooster icon to Info.plist
+    
     set(MACOSX_BUNDLE_ICON_FILE pianobooster.icns)
 
     # Tells CMake where to find and install the pianobooster icon
@@ -253,7 +253,7 @@ if(APPLE)
 
     add_custom_target(install-translations cp -R -v ${CMAKE_CURRENT_BINARY_DIR}/translations/*.qm ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.app/Contents/Resources/translations)
 
-endif(APPLE)
+endif(APPLE OR ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 
 if(UNIX AND NOT APPLE)
     ADD_EXECUTABLE( pianobooster ${PIANOBOOSTER_SRCS}
