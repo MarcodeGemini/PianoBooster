@@ -652,8 +652,8 @@ void QtWindow::open()
     const auto currentSong = QFileInfo(m_settings->getCurrentSongLongFileName());
     const auto dir = currentSong.isFile() ? currentSong.path() : QDir::homePath();
     const auto fileName = QFileDialog::getOpenFileName(this,tr("Open MIDI File"),
-                            dir, tr("MIDI Files") + " (*.mid *.MID *.midi *.MIDI *.kar *.KAR)",
-                            nullptr, QFileDialog::DontUseNativeDialog);
+                            dir, tr("MIDI Files") + " (*.mid *.MID *.midi *.MIDI *.kar *.KAR)");
+    
     if (!fileName.isEmpty()) {
         m_settings->openSongFile(fileName);
         setCurrentFile(fileName);
