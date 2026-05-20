@@ -470,7 +470,7 @@ void QtWindow::showMidiSetup(){
 
     m_glWidget->stopTimerEvent();
     GuiMidiSetupDialog midiSetupDialog(this);
-    midiSetupDialog.init(m_song, m_settings);
+    midiSetupDialog.init(m_song, m_settings.get());
     midiSetupDialog.exec();
     m_song->flushMidiInput();
     m_glWidget->startTimerEvent();
