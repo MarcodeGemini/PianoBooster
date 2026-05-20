@@ -45,8 +45,6 @@ class CGLView;
 class QAction;
 class QMenu;
 
-std::unique_ptr<CSettings> m_settings;
-
 class QSlider;
 class QPushButton;
 class QTextBrowser;
@@ -194,7 +192,7 @@ private:
     void readSettings();
     void writeSettings();
 
-    CSettings* m_settings;
+    std::unique_ptr<CSettings> m_settings;
 
     GuiSidePanel *m_sidePanel;
     GuiTopBar *m_topBar;
