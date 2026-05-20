@@ -339,30 +339,30 @@ void QtWindow::createActions()
 
     m_shortcutAct = new QAction(tr("&PC Shortcut Keys"), this);
     m_shortcutAct->setToolTip(tr("The PC Keyboard shortcut keys"));
-    connect(m_shortcutAct, SIGNAL(triggered()), this, SLOT(keyboardShortcuts()));
+    connect(m_shortcutAct, &QAction::triggered, this, &QtWindow::keyboardShortcuts);
 
     m_setupMidiAct = new QAction(tr("&MIDI Setup ..."), this);
     m_setupMidiAct->setShortcut(tr("Ctrl+S"));
     m_setupMidiAct->setToolTip(tr("Setup the MIDI input and output"));
-    connect(m_setupMidiAct, SIGNAL(triggered()), this, SLOT(showMidiSetup()));
+    connect(m_setupMidiAct, &QAction::triggered, this, &QtWindow::showMidiSetup);
 
     m_setupKeyboardAct = new QAction(tr("Piano &Keyboard Setting ..."), this);
     m_setupKeyboardAct->setShortcut(tr("Ctrl+K"));
     m_setupKeyboardAct->setToolTip(tr("Change the piano keyboard settings"));
-    connect(m_setupKeyboardAct, SIGNAL(triggered()), this, SLOT(showKeyboardSetup()));
+    connect(m_setupKeyboardAct, &QAction::triggered, this, &QtWindow::showKeyboardSetup);
 
     m_fullScreenStateAct = new QAction(tr("&Fullscreen"), this);
     m_fullScreenStateAct->setToolTip(tr("Fullscreen mode"));
     m_fullScreenStateAct->setShortcut(tr("F11"));
     m_fullScreenStateAct->setCheckable(true);
-    connect(m_fullScreenStateAct, SIGNAL(triggered()), this, SLOT(onFullScreenStateAct()));
+    connect(m_fullScreenStateAct, &QAction::triggered, this, &QtWindow::onFullScreenStateAct);
 
     m_sidePanelStateAct = new QAction(tr("&Show the Side Panel"), this);
     m_sidePanelStateAct->setToolTip(tr("Show the Left Side Panel"));
     m_sidePanelStateAct->setShortcut(tr("F12"));
     m_sidePanelStateAct->setCheckable(true);
     m_sidePanelStateAct->setChecked(true);
-    connect(m_sidePanelStateAct, SIGNAL(triggered()), this, SLOT(toggleSidePanel()));
+    connect(m_sidePanelStateAct, &QAction::triggered, this, &QtWindow::toggleSidePanel);
 
     m_viewPianoKeyboard = new QAction(tr("Show Piano &Keyboard"), this);
     m_viewPianoKeyboard->setToolTip(tr("Show Piano Keyboard Widget"));
@@ -371,26 +371,26 @@ void QtWindow::createActions()
     if (m_settings->value("View/PianoKeyboard").toString()=="on"){
         m_viewPianoKeyboard->setChecked(true);
     }
-    connect(m_viewPianoKeyboard, SIGNAL(triggered()), this, SLOT(onViewPianoKeyboard()));
+    connect(m_viewPianoKeyboard, &QAction::triggered, this, &QtWindow::onViewPianoKeyboard);
 
     m_setupPreferencesAct = new QAction(tr("&Preferences ..."), this);
     m_setupPreferencesAct->setToolTip(tr("Settings"));
     m_setupPreferencesAct->setShortcut(tr("Ctrl+P"));
-    connect(m_setupPreferencesAct, SIGNAL(triggered()), this, SLOT(showPreferencesDialog()));
+    connect(m_setupPreferencesAct, &QAction::triggered, this, &QtWindow::showPreferencesDialog);
 
     m_songDetailsAct = new QAction(tr("Song &Details ..."), this);
     m_songDetailsAct->setToolTip(tr("Song Settings"));
     m_songDetailsAct->setShortcut(tr("Ctrl+D"));
-    connect(m_songDetailsAct, SIGNAL(triggered()), this, SLOT(showSongDetailsDialog()));
+    connect(m_songDetailsAct, &QAction::triggered, this, &QtWindow::showSongDetailsDialog);
 
     QAction* act = new QAction(this);
     act->setShortcut(tr("Shift+F1"));
-    connect(act, SIGNAL(triggered()), this, SLOT(enableFollowTempo()));
+    connect(act, &QAction::triggered, this, &QtWindow::enableFollowTempo);
     addAction(act);
 
     act = new QAction(this);
     act->setShortcut(tr("Alt+F1"));
-    connect(act, SIGNAL(triggered()), this, SLOT(disableFollowTempo()));
+    connect(act, &QAction::triggered, this, &QtWindow::disableFollowTempo);
     addAction(act);
 
     addShortcutAction("ShortCuts/RightHand",        SLOT(on_rightHand()));
@@ -408,8 +408,7 @@ void QtWindow::createActions()
      for (int i = 0; i < maxRecentFiles(); ++i) {
          m_recentFileActs[i] = new QAction(this);
          m_recentFileActs[i]->setVisible(false);
-         connect(m_recentFileActs[i], SIGNAL(triggered()),
-                 this, SLOT(openRecentFile()));
+         connect(m_recentFileActs[i], &QAction::triggered, this, &QtWindow::openRecentFile);
      }
 }
 
